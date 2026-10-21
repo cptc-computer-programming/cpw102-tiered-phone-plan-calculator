@@ -13,14 +13,24 @@ Before beginning, follow [GITHUB_SETUP.md](GITHUB_SETUP.md).
 - Combine conditions with logical operators.
 - Test boundaries and compare results when one input changes.
 
-## Start from Your Lab
+## Adapt Your Lab
+
+Keep your working lab. Replace its fixed overage rate with a function that selects the rate, then add premium membership.
 
 > [!IMPORTANT]
-> Copy your completed lab program from `03_execution/data_bill.py` into this repository's `data_bill.py`. The supplied file is blank.
+> Open your completed lab's `03_execution/data_bill.py` beside this homework's `data_bill.py`. Copy the relevant code into the outline below; keep your lab repository unchanged.
 
-- Retain your data usage and base-cost inputs, Boolean-returning data limit check, and within-limit, moderate, and high usage messages.
-- Continue using the data limit function's result in a decision.
-- Replace the fixed overage rate with the new pricing rules below.
+| Function in the homework | What to put there |
+| --- | --- |
+| `exceeds_data_limit(data_used)` | Your lab's Boolean-returning data-limit check. Rename it if needed and update its calls. |
+| `get_overage_rate(data_used, has_premium)` | New logic that returns the rate from the pricing table below. |
+| `main()` | Your lab's existing inputs, calculations, usage decisions, and printed messages. Keep these together. |
+
+1. Replace the `pass` in `exceeds_data_limit` with your existing check. Copy the rest of your program into `main()`; if your lab already has a `main()`, copy its body rather than defining it again.
+2. Add the premium question in `main()` and convert the response into a Boolean variable.
+3. Implement `get_overage_rate`. In `main()`, call it and use its returned rate instead of the fixed $2 rate.
+4. Add the premium recommendation and test the updated program.
+
 
 ## New Pricing Policy
 
@@ -42,19 +52,18 @@ Recommend considering premium membership only when a regular customer exceeds th
 
 ## Implementation Requirements
 
-- Use an `if-elif-else` structure to handle the three usage tiers.
-- Use a nested decision within a pricing tier to select the regular or premium rate.
-- Store premium membership as a Boolean variable. Accept `yes` or `no` regardless of capitalization or surrounding spaces.
-- Define and call a function that accepts data usage and premium status and returns the applicable overage rate. Return zero when there is no overage. This function should return a number rather than print it.
-- Keep and use your Boolean-returning data limit function from the lab.
-- Use logical operators to combine membership and overage status in the recommendation decision.
-- Store the selected rate and overage amount in variables, then calculate the overage cost and total bill after selecting the rate.
+Complete the three functions in `data_bill.py`:
 
-You choose the function and variable names, prompts, and output layout.
+- **Data-limit check:** Reuse your lab function and use its Boolean result in a decision in `main()`.
+- **Overage rate:** Use `if-elif-else` for the usage tiers and a nested decision for premium pricing. Return the rate, or `0` within the data limit.
+- **Main program:** Store premium status as a Boolean, ignoring capitalization and extra spaces in the response. Call the rate function, store the rate and overage GB, and use them to calculate the charges. Use logical operators for the premium recommendation.
 
-## Input Assumptions
+Choose your own local variable names, prompts, and output layout.
 
-Data usage and base cost will be numeric. The membership response will be `yes` or `no`, possibly with different capitalization or surrounding spaces. You do not need to validate other input or prompt repeatedly.
+## Assumptions
+
+- Data usage and base cost will be numeric. 
+- The membership response will be `yes` or `no`, possibly with different capitalization or surrounding spaces. 
 
 ## Output
 
@@ -98,7 +107,7 @@ Run your program from the repository folder:
 python data_bill.py
 ```
 
-Reuse the lab cases for 10 GB with a $40 base cost, 15 GB with a $40 base cost, and 15.5 GB with a $50 base cost. Use `no` for premium membership and recalculate the expected bills under the new policy. Also test:
+Here are some example test cases you can use to confirm your program behaves as required.
 
 | Data used (GB) | Base cost | Premium response | Focus |
 | --- | --- | --- | --- |
@@ -107,16 +116,9 @@ Reuse the lab cases for 10 GB with a $40 base cost, 15 GB with a $40 base cost, 
 | 20.5 | 40 | `no` | Just above the pricing boundary |
 | 20.5 | 40 | `yes` | Premium rate above the boundary |
 
-Repeat a premium case using ` YES `, including the spaces. Determine expected results before running each case. Check the bill, usage category, and whether a recommendation should appear.
 
-Include the inputs, expected results, and actual results for these checks in your pull request description. No automated test file is supplied.
 
 ## Submission
 
-1. Commit and push your work to `development`.
-2. Open a pull request from `development` into `main`.
-3. In its description, include your test results and briefly explain what you retained from the lab, what you changed, and why the pricing tiers use `if-elif-else` instead of independent `if` statements.
-4. **Leave the pull request open** for review.
-5. Submit the **pull request URL** in Canvas.
 
 See [GITHUB_SETUP.md](GITHUB_SETUP.md) for detailed instructions.
